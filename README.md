@@ -1,30 +1,27 @@
 
-Porikalan Next.js Project (Demo)
---------------------------------
-Files included:
-- pages/* : Next.js pages (index, courses, timetable, contact, admin)
-- pages/api/* : API routes - certificates (GET) and upload (POST)
-- public/images/* : photos (jpg placeholders) + original HEICs
-- public/certs/* : sample.pdf (demo certificate uploaded)
-- data/certs.json : demo mapping (Rahul Kumar - 12345 -> sample.pdf)
-- styles/globals.css : site styles
-- package.json, next.config.js
+Porikalan Next.js + Supabase (Ready-to-deploy)
+---------------------------------------------
+Steps to use:
+1. Create a Supabase project and Storage bucket named 'certificates' (public).
+2. Create table 'certs' using SQL:
+   create table certs (
+     id bigint generated always as identity primary key,
+     name text not null,
+     cert_number text not null,
+     file_url text not null
+   );
 
-How it works:
-- Home page has a certificate download form which calls GET /api/certificates?name=...&cert=...
-- Admin page allows uploading a PDF using POST /api/upload (multipart/form-data)
-- The upload handler saves the PDF to public/certs and appends mapping to data/certs.json
+3. Copy this project to your machine. Install deps: npm install
+4. Create a .env.local file at project root with:
+   NEXT_PUBLIC_SUPABASE_URL=your-supabase-url
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
+   SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
+   NEXT_PUBLIC_ADMIN_PW=porikalanAdmin123
 
-Important deployment notes:
-- This demo stores uploaded files on the server filesystem (public/certs) and mapping in data/certs.json.
-  On many serverless hosts (Vercel, Netlify) the filesystem is ephemeral and writes won't persist between deployments.
-- For production you should use a persistent storage (S3 / Cloud Storage) and a proper database (Mongo, Supabase, etc.).
-- If you want, I can convert the upload to use Vercel serverless + S3 or Supabase storage — tell me and I'll prepare steps.
+5. Run locally: npm run dev
+6. Deploy to Vercel: Add the above env vars in Vercel dashboard. Deploy.
+   Important: Use the SERVICE_ROLE key only on server-side (we use it in api/upload-cert).
 
-Admin credentials (demo): porikalanAdmin123
-Demo student: Rahul Kumar / 12345
-
-How to run locally:
-1. unzip and run `npm install`
-2. `npm run dev`
-3. Open http://localhost:3000
+Notes:
+- Uploaded files are saved to Supabase storage and the public URL is stored in 'certs' table.
+- For security, restrict service role key usage and rotate keys as needed.

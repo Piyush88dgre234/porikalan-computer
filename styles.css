@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body { @apply bg-white text-gray-800; }
+.header { @apply bg-white shadow sticky top-0 z-50; }
+.container { @apply max-w-4xl mx-auto px-4 py-6; }
+.brand { @apply font-bold text-lg; }
+.btn { @apply inline-block px-4 py-2 rounded-md font-semibold; }
+.btn-primary { @apply bg-blue-600 text-white; }
+.btn-ghost { @apply border border-gray-200; }
