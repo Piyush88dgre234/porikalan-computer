@@ -1,0 +1,46 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Admin - Porikalan</title><link rel="stylesheet" href="style.css"></head><body>
+<header class="header"><div class="container nav"><div class="brand">Porikalan Computer Institute</div><nav class="navlinks"><a href="index.html">Home</a><a href="courses.html">Courses</a><a href="timetable.html">Timetable</a><a href="contact.html">Contact</a><a href="admin.html" style="background:#0b1223;color:#fff;padding:8px 12px;border-radius:6px">Admin</a></nav></div></header>
+<main class="container" style="padding:40px 0">
+<h2>Admin Panel (Client-side demo)</h2>
+<p style="color:var(--muted)">This admin page is a simple demo. For real uploads, you'll need server hosting or use Netlify/Vercel functions. Below is a quick demo to create a mapping file.</p>
+<div style="max-width:600px;background:#fff;padding:18px;border-radius:10px;box-shadow:0 6px 18px rgba(12,20,35,0.04)">
+  <label>Enter Admin Password:</label>
+  <input id="pw" placeholder="password" type="password">
+  <button id="loginBtn">Login</button>
+  <div id="adminArea" style="display:none;margin-top:12px">
+    <h4>Upload Certificate (demo)</h4>
+    <p style="color:var(--muted)">Pick a student's name, certificate number and upload a PDF file. (Client-side demo — files won't persist on static hosting)</p>
+    <input id="studentName" placeholder="Student Name"><br>
+    <input id="studentCert" placeholder="Certificate Number"><br>
+    <input id="pdfFile" type="file" accept=".pdf"><br><br>
+    <button id="saveBtn">Save Demo Mapping</button>
+    <p id="admMsg"></p>
+  </div>
+</div>
+</main><footer class="footer">© Porikalan</footer>
+<script>
+document.getElementById("loginBtn").addEventListener("click", ()=>{
+  const pw = document.getElementById("pw").value;
+  if(pw === "porikalanAdmin123"){
+    document.getElementById("adminArea").style.display = "block";
+  } else alert("Wrong password");
+});
+document.getElementById("saveBtn").addEventListener("click", ()=>{
+  const name = document.getElementById("studentName").value.trim();
+  const cert = document.getElementById("studentCert").value.trim();
+  const file = document.getElementById("pdfFile").files[0];
+  const msg = document.getElementById("admMsg");
+  if(!name || !cert || !file){ msg.textContent = "Please fill all fields and choose a PDF."; return; }
+  // client-side demo: create mapping saved to localStorage
+  const mapping = JSON.parse(localStorage.getItem("certMap") || "[]");
+  const reader = new FileReader();
+  reader.onload = function(e){
+    // store pdf as data URL (only for demo)
+    mapping.push({name, cert, fileData:e.target.result, fileName:file.name});
+    localStorage.setItem("certMap", JSON.stringify(mapping));
+    msg.textContent = "Saved to browser storage (demo). For permanent uploads, use server.";
+  };
+  reader.readAsDataURL(file);
+});
+</script>
+</body></html>
