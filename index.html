@@ -1,118 +1,14 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Porikalan Computer Institute</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <header class="header">
-    <div class="container nav">
-      <div class="brand">Porikalan Computer Institute</div>
-      <nav class="navlinks">
-        <a href="index.html" class="active">Home</a>
-        <a href="courses.html">Courses</a>
-        <a href="timetable.html">Timetable</a>
-        <a href="contact.html">Contact</a>
-        <a href="admin.html" style="background:#0b1223;color:#fff;padding:8px 12px;border-radius:6px">Admin</a>
-      </nav>
-    </div>
-  </header>
-
-  <main>
-    <section class="hero">
-      <div class="container grid">
-        <div>
-          <p style="color:var(--muted);margin:0">Professional Computer Training</p>
-          <h1>Join <span style="color:var(--blue)">Porikalan Computer Institute</span></h1>
-          <p>Smart timetable, practical labs & result oriented coaching. Join our batches & start learning today.</p>
-          <div style="margin-top:18px;">
-            <a href="timetable.html" class="btn btn-primary">View Timetable</a>
-            <a href="https://wa.me/918965877787" class="btn btn-green" style="margin-left:8px">WhatsApp: 7896587787</a>
-          </div>
-        </div>
-        <div class="card">
-          <h3 style="margin-top:0">Expert Mentors</h3>
-          <ul style="padding-left:18px;color:var(--muted)">
-            <li>Complete Notes</li>
-            <li>Result Focused</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <section class="container photos">
-      <img src="IMG_4640.HEIC" alt="Photo 1">
-      <img src="IMG_4641.HEIC" alt="Photo 2">
-    </section>
-
-    <section class="certificate-section">
-      <h2>Download Your Certificate</h2>
-      <div class="certificate-box">
-        <form id="certificateForm">
-          <input id="name" placeholder="Enter Your Name" required>
-          <input id="certNo" placeholder="Enter Certificate Number" required>
-          <button type="submit">Download</button>
-        </form>
-        <p id="msg" style="color:#c0392b"></p>
-      </div>
-    </section>
-
-    <section class="courses-section container">
-      <h2>Our Courses</h2>
-      <p style="color:var(--muted)">Carefully designed courses for practical skills.</p>
-      <div class="courses-grid" style="margin-top:20px">
-        <div class="course-card">
-          <h4>DCA (Diploma in Computer Applications)</h4>
-          <p style="color:var(--muted)">Duration: 6 months</p>
-          <div style="margin-top:12px">
-            <a class="btn btn-primary" href="#">Enroll / WhatsApp</a>
-          </div>
-        </div>
-        <div class="course-card">
-          <h4>ADCA (Advanced Diploma in Computer Applications)</h4>
-          <p style="color:var(--muted)">Duration: 6 months (Evening)</p>
-          <div style="margin-top:12px">
-            <a class="btn btn-primary" href="#">Enroll / WhatsApp</a>
-          </div>
-        </div>
-        <div class="course-card">
-          <h4>Advance Jana</h4>
-          <p style="color:var(--muted)">Duration: 3 months (Advance)</p>
-          <div style="margin-top:12px">
-            <a class="btn btn-primary" href="#">Enroll / WhatsApp</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <footer class="footer">
-      © Porikalan Computer Institute — Contact: 7896587787
-    </footer>
-  </main>
-
-  <script>
-    // certificate check (demo database stored in JS - replace later with server-side)
-    const DB = [
-      {name:"Rahul Kumar", cert:"12345", file:"sample.pdf"}
-    ];
-
-    document.getElementById("certificateForm").addEventListener("submit", function(e){
-      e.preventDefault();
-      const name = document.getElementById("name").value.trim().toLowerCase();
-      const certNo = document.getElementById("certNo").value.trim();
-      const found = DB.find(r => r.name.toLowerCase() === name && r.cert === certNo);
-      const msg = document.getElementById("msg");
-      if(found){
-        msg.style.color = "#1b7a2f";
-        msg.textContent = "Record found. Starting download...";
-        setTimeout(()=>{ window.location.href = found.file; }, 700);
-      } else {
-        msg.style.color = "#c0392b";
-        msg.textContent = "No record found. Please check your details.";
-      }
-    });
-  </script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Porikalan Computer Institute</title>
+    <meta name="description" content="Professional computer training in Rowriah Nefa Gate, Jorhat, Assam." />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="antialiased bg-gray-50 text-gray-900">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
 </html>
